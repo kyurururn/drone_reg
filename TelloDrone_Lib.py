@@ -6,7 +6,7 @@ import re
 import os
 
 class TelloDrone:
-    def __init__(self, tello_ip, tello_port, send_reg_j, capture_setting, take_movie):
+    def __init__(self, tello_ip, tello_port, send_reg_j = True, capture_setting = False, take_movie = False):
         self.tello_ip = tello_ip
         self.tello_port = tello_port
         self.tello_address = (self.tello_ip, self.tello_port)
