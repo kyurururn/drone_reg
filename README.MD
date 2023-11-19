@@ -20,7 +20,7 @@ from TelloDrone_Lib import TelloDrone
 
 drone = TelloDrone("192.168.10.1",
                     8889,
-                    send_reg_j=True,
+                    send_regu=True,
                     capture_setting=True,
                     take_movie=True)
 
