@@ -6,7 +6,7 @@ import re
 import os
 
 class TelloDrone:
-    def __init__(self, tello_ip, tello_port, send_reg_j = True, capture_setting = False, take_movie = False):
+    def __init__(self, tello_ip, tello_port, send_regu = True, capture_setting = False, take_movie = False):
         self.tello_ip = tello_ip
         self.tello_port = tello_port
         self.tello_address = (self.tello_ip, self.tello_port)
@@ -15,7 +15,7 @@ class TelloDrone:
         self.sock.bind(('', tello_port))
         self.sock.sendto("command".encode("utf-8"), self.tello_address)
 
-        self.send_reg_j = send_reg_j
+        self.send_reg_j = send_regu
         self.capture_setting = capture_setting
         self.take_movie = take_movie
 
@@ -43,7 +43,6 @@ class TelloDrone:
             self.thread_capture = threading.Thread(target=self.capture)
             self.thread_capture.start()
 
-
     def capture(self):
         try:
             if self.take_movie:
@@ -53,7 +52,7 @@ class TelloDrone:
                 fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
                 out = cv2.VideoWriter('movie.mp4', fourcc, fps, (width, height))
             while self.capture_setting:
-                ret,  self.frame = self.cap.read()
+                ret, self.frame = self.cap.read()
                 if self.take_movie: out.write(self.frame)
                 cv2.imshow('Tello Camera View', self.frame)
                 if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -77,6 +76,22 @@ class TelloDrone:
             self.shoot()
             return True
         else:
+            if ' ' in command:
+                parts = command.split(' ')
+                if parts[0] == 'f':
+                    parts[0] = 'forward'
+                elif parts[0] == 'b':
+                    parts[0] = 'back'
+                elif parts[0] == 'r':
+                    parts[0] = 'right'
+                elif parts[0] == 'l':
+                    parts[0] = 'left'
+                elif parts[0] == 'u':
+                    parts[0] = 'up'
+                elif parts[0] == 'd':
+                    parts[0] = 'down'
+                
+                command = " ".join(parts)
             self.sock.sendto(command.encode("utf-8"), self.tello_address)
             return True
 
