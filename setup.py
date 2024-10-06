@@ -1,9 +1,9 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 setup(
     name='TelloDrone',
     version='0.1',
-    packages=find_packages(),
+    py_modules=['TelloDrone_Lib'],  # ファイル名（拡張子は不要）
     install_requires=[
         'opencv-python',
         'numpy',
