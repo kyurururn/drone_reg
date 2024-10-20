@@ -16,11 +16,27 @@ capture_settingをTrueにする必要があります。
 
 ## サンプルコード
 
+### コマンドの送受信を行うプログラム
 ```python
 from TelloDrone_Lib import TelloDrone
 
-drone = TelloDrone("192.168.10.1",
-                    8889,
+drone = TelloDrone("192.168.10.1",8889,
+                    send_regu=True,
+                    capture_setting=True,
+                    take_movie=True)
+
+while True:
+    msg = input()
+    answer = drone.send_command(msg)
+    if not answer:
+        break
+```  
+
+### 映像収録や写真撮影を行うプログラム
+```python
+from TelloDrone_Lib import TelloDrone
+
+drone = TelloDrone("192.168.10.1",8889,
                     send_regu=True,
                     capture_setting=True,
                     take_movie=True)
