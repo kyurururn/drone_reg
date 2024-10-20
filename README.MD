@@ -20,10 +20,7 @@ capture_settingをTrueにする必要があります。
 ```python
 from TelloDrone_Lib import TelloDrone
 
-drone = TelloDrone("192.168.10.1",8889,
-                    send_regu=True,
-                    capture_setting=True,
-                    take_movie=True)
+drone = TelloDrone("192.168.10.1",8889)
 
 while True:
     msg = input()
@@ -47,7 +44,14 @@ while True:
     if not answer:
         break
 ```  
-  
+## 設定
+### send_regu
+長時間コマンドが送られていない時に自動で着陸**しない**ようにします。
+### capture_setting
+映像や画像の設定を行います。
+### take_movie
+映像を撮影します。
+
 ## 標準コマンド
 ### 離陸/着陸
 
@@ -87,7 +91,13 @@ while True:
   
 ```ccw {数値}```  
 左回りに{数値}cm回転する  
+
+### 撮影
   
+```shoot```  
+ドローンカメラで画像を撮影する。  
+capture_settingをTrueにする必要があります。  
+
 ## 短縮コマンド
 ```up {数値}```      -> ```u {数値}```  
 ```down {数値}```    -> ```d {数値}```  
