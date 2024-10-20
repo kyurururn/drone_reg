@@ -45,11 +45,11 @@ while True:
         break
 ```  
 ## 設定
-```send_regu```
+```send_regu(= True)```  
 長時間コマンドが送られていない時に自動で着陸**しない**ようにします。  
-```capture_setting```  
+```capture_setting(= True)```  
 映像や画像の設定を行います。  
-```take_movie```  
+```take_movie(= True)```  
 映像を撮影します。
 
 ## 標準コマンド
